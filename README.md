@@ -20,17 +20,17 @@ terms and conditions in the [LICENSE](./LICENSE) file. If this code
 is useful in your research consider citing:
 ```BibTeX
 @Inbook{Solís-Lemus2017,
-author="Sol{\'i}s-Lemus, Jos{\'e} Alonso
-and Stramer, Brian
-and Slabaugh, Greg
-and Reyes-Aldasoro, Constantino Carlos",
-editor="Vald{\'e}s Hern{\'a}ndez, Mar{\'i}a
-and Gonz{\'a}lez-Castro, V{\'i}ctor",
-title="Segmentation of Overlapping Macrophages Using Anglegram Analysis",
-bookTitle="Medical Image Understanding and Analysis: 21st Annual Conference, MIUA 2017, Edinburgh, UK, July 11--13, 2017, Proceedings",
-year="2017",
-publisher="Springer International Publishing",
-isbn="978-3-319-60964-5",
-doi="10.1007/978-3-319-60964-5_69",
+  author="Sol{\'i}s-Lemus, Jos{\'e} Alonso
+    and Stramer, Brian and Slabaugh, Greg
+    and Reyes-Aldasoro, Constantino Carlos",
+  editor="Vald{\'e}s Hern{\'a}ndez, Mar{\'i}a
+    and Gonz{\'a}lez-Castro, V{\'i}ctor",
+  title="Segmentation of Overlapping Macrophages Using Anglegram Analysis",
+  bookTitle="Medical Image Understanding and Analysis: 21st Annual 
+     Conference, MIUA 2017, Edinburgh, UK, July 11--13, 2017, Proceedings",
+  year="2017",
+  publisher="Springer International Publishing",
+  isbn="978-3-319-60964-5",
+  doi="10.1007/978-3-319-60964-5_69",
 }
 ```
