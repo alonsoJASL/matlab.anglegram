@@ -25,6 +25,6 @@ end
 auxaghandles.agstd = std(anglegram, 0, 3);
 anglegram = mean(anglegram,3);
 
-if nargout < 2
+if nargout > 1
     aghandles = auxaghandles;
 end
