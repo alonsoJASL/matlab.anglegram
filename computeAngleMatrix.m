@@ -33,37 +33,45 @@ if whichClump > length(clumpBoundaries)
 else
     thisClumpIndx = whichClump; % index for the boundary to analyse.
     clumpBoundary = clumpBoundaries{thisClumpIndx}(1:end-1,:);
-
+    
     numPoints = size(clumpBoundary,1);
-
+    
     separationMax=fix(numPoints/2)-2;
     clumpAngleMatrix = zeros(numPoints,separationMax);
-
+    
     % wrap around index for taking the points
     wrapN = @(x, N) (1 + mod(x-1, N));
-
+    
     tic;
-        for whichPoint=1:numPoints
-            this = clumpBoundary(whichPoint, :);
-
-            for sep=1:neighjump:separationMax
-                previous = clumpBoundary(wrapN(whichPoint-sep,numPoints),:);
-                next = clumpBoundary(wrapN(whichPoint+sep,numPoints),:);
-
-                % centered around this point
-                thisC = [previous - this;
-                    next - this];
-
-                theta = wrapN(round(rad2deg(angle(thisC(:,2)+thisC(:,1).*1i))),360);
-                anglepointsep = wrapN(theta(1)-theta(2),360);
-                if  anglepointsep < 340
-                    clumpAngleMatrix(whichPoint,sep) = anglepointsep;
-                elseif sep < separationMax/2
-                    clumpAngleMatrix(whichPoint,sep) = anglepointsep;
-                end
+    for whichPoint=1:numPoints
+        this = clumpBoundary(whichPoint, :);
+        
+        for sep=neighjump:neighjump:separationMax
+            previous = clumpBoundary(wrapN(whichPoint-sep,numPoints),:);
+            next = clumpBoundary(wrapN(whichPoint+sep,numPoints),:);
+            
+            % centered around this point
+            thisC = [previous - this;
+                next - this];
+            
+            theta = wrapN(round(rad2deg(angle(thisC(:,2)+thisC(:,1).*1i))),360);
+            anglepointsep = wrapN(theta(1)-theta(2),360);
+            if  anglepointsep < 340
+                clumpAngleMatrix(whichPoint,sep) = anglepointsep;
+            elseif sep < separationMax/2
+                clumpAngleMatrix(whichPoint,sep) = anglepointsep;
             end
         end
-
+    end
+    
+    if neighjump>1
+        nj = neighjump;
+        for jx=neighjump:neighjump:separationMax
+           clumpAngleMatrix(:,(jx-nj+1):jx) = ...
+               repmat(clumpAngleMatrix(:,jx),1,nj);
+        end 
+    end
+    
     t1 = toc;
     fprintf('%s: INFO. Working with boundaries and angles: TIME=%f\n', ...
         mfilename, t1);

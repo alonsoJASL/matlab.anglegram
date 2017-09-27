@@ -3,17 +3,19 @@ function [candidatePoints, candieshandles] = computeCandidatePoints(angleMatrix,
 % COMPUTE CANDIDATE POINTS from the anglegram matrix (angleMatrix).
 %
 
-if nargin < 2
-    fprintf('%s: ERROR. Not enough input arguments.', mfilename);
-    candidatePoints = [] ;
-    candieshandles = [];
-    return;
-elseif nargin < 3
-    mainthresh = 150;
-    offsetVar = 7;
-    statsfname = 'max';
-else
-    [mainthresh, offsetVar, statsfname] = getoptions(angleopts);
+switch nargin
+    case {0, 1, 4}
+        fprintf('%s: ERROR. Not enough input arguments.', mfilename);
+        candidatePoints = [] ;
+        candieshandles = [];
+        return;
+    case 2
+        mainthresh = 150;
+        offsetVar = 7;
+        statsfname = 'max';
+    case 3
+        angleopts = mainthresh;
+        [mainthresh, offsetVar, statsfname] = getoptions(angleopts);
 end
 
 aMthresh = angleMatrix;
@@ -41,7 +43,7 @@ switch lower(statsfname)
         aMthresh(isnan(aMthresh)) = 0;
         angleSummaryVector = trapz(aMthresh(:,offsetVar:end),2);
         %angleSummaryVector = sqrt(angleSummaryVector);
-
+        
         angleSummaryVector(angleSummaryVector==0) = nan;
         meanAM = mean(angleSummaryVector, 'omitnan');
         stdAM = std(angleSummaryVector, 'omitnan');
