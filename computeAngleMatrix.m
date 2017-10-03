@@ -73,7 +73,4 @@ else
     end
     
     t1 = toc;
-    fprintf('%s: INFO. Working with boundaries and angles: TIME=%f\n', ...
-        mfilename, t1);
-    % GET THE BREAKING POINT CANDIDATES PER POINT.
 end
