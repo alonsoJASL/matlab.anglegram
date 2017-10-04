@@ -1,7 +1,7 @@
 function [cornies, cornyLoc, cornyhands] = computeCorners(anglematrix, boundy, opts)
 % COMPUTE CORNERS. Calculates corners from the anglegram matrix. The
-% anglegram is shrunk to ensure a better interpretation of the data. 
-% 
+% anglegram is shrunk to ensure a better interpretation of the data.
+%
 
 if nargin < 3
     agsize = [64 64];
@@ -23,8 +23,11 @@ switch lower(statsfname)
 end
 
 anglesumve = statfn(anglegram);
+mam = mean(anglesumve);
+stam = std(anglesumve);
 
-[minval, minlocations] = findpeaks(-[anglesumve;anglesumve]);
+[minval, minlocations] = findpeaks(-[anglesumve;anglesumve],...
+    'MinPeakHeight',-mam+stam);
 minval = -minval;
 
 [minval, ic,~] = unique(minval, 'stable');
@@ -33,10 +36,41 @@ minlocations = wrapN(minlocations(ic), agsize(1));
 cornyLoc = fix((minlocations./64)*size(boundy,1));
 cornies = boundy(cornyLoc,:);
 
-if nargouut > 2
-    cornyhands.minlocations = minlocations;
-    cornyhands.minval = minval;
+cornyhands.anglesumve = anglesumve;
+cornyhands.minlocations = minlocations;
+cornyhands.minval = minval;
+cornyhands.mam = mam;
+cornyhands.stam = stam;
+
+test = length(cornyhands.minval)==4 && ...
+    max(cornyhands.minval)-min(cornyhands.minval) < 1;
+if test == true
+    fprintf('%s: Suspicious points found. Rearranging corner points..\n',...
+        mfilename);
+    cornyhands.allcornies = cornies;
+    cornyhands.allcornyloc = cornyLoc;
+    cornies = [];
+    cornyLoc = [];
 end
+
+switch length(cornyLoc)
+    case 0
+        cornyhands.guesstype = 'circ';
+        cornyhands.guesslabel = 1;
+    case 1
+        cornyhands.guesstype = 'drop';
+        cornyhands.guesslabel = 2;
+    case 2
+        cornyhands.guesstype = 'bidrop';
+        cornyhands.guesslabel = 3;
+    case 3
+        cornyhands.guesstype = 'tridrop';
+        cornyhands.guesslabel = 4;
+    otherwise
+        cornyhands.guesstype = 'multidrop';
+        cornyhands.guesslabel = 5;
+end
+
 end
 
 function [agsize, offst, statsfname] = getoptions(opts)
