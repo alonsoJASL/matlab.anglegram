@@ -78,7 +78,7 @@ This project is part of the GNU GENERAL PUBLIC LICENSE v3, read all the
 terms and conditions in the [LICENSE](./LICENSE) file. If this code
 is useful in your research consider citing:
 ```BibTeX
-@Inbook{Solís-Lemus2017,
+@Inbook{solislemus2017,
   author="Sol{\'i}s-Lemus, Jos{\'e} Alonso and Stramer, Brian
   and Slabaugh, Greg and Reyes-Aldasoro, Constantino Carlos",
   editor="Vald{\'e}s Hern{\'a}ndez, Mar{\'i}a and Gonz{\'a}lez-Castro, V{\'i}ctor",
