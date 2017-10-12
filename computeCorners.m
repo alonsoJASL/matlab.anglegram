@@ -2,6 +2,17 @@ function [cornies, cornyLoc, cornyhands] = computeCorners(anglematrix, boundy, o
 % COMPUTE CORNERS. Calculates corners from the anglegram matrix. The
 % anglegram is shrunk to ensure a better interpretation of the data.
 %
+% USAGE: 
+%    [cornies, cornyLoc, cornyhands] = computeCorners(anglematrix, boundy, opts)
+%
+%    [cornies, cornyLoc, cornyhands] = computeCorners([], boundy, opts)
+%
+
+testag = false;
+if isempty(anglematrix)
+    testag = true;
+    anglematrix = computeMultiAnglegram(boundy); 
+end
 
 if nargin < 3
     agsize = [64 64];
@@ -41,6 +52,9 @@ cornyhands.minlocations = minlocations;
 cornyhands.minval = minval;
 cornyhands.mam = mam;
 cornyhands.stam = stam;
+if testag == true
+    cornyhands.anglegram = anglematrix;
+end
 
 test = length(cornyhands.minval)==4 && ...
     max(cornyhands.minval)-min(cornyhands.minval) < 1;
@@ -68,7 +82,7 @@ switch length(cornyLoc)
         cornyhands.guesslabel = 4;
     otherwise
         cornyhands.guesstype = 'multidrop';
-        cornyhands.guesslabel = 5;
+        cornyhands.guesslabel = -1;
 end
 
 end
