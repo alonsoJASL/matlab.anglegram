@@ -12,6 +12,9 @@ function [anglegram, aghandles] = computeMultiAnglegram(boundies, whix)
 if nargin < 2
     whix = 1;
 end
+if ~iscell(boundies)
+    boundies = {boundies};
+end
 
 auxaghandles.oganglegram = computeAngleMatrix(boundies,whix,1);
 anglegram = zeros(size(auxaghandles.oganglegram,1), ...
