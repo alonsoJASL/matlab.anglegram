@@ -21,6 +21,7 @@ A = images.data(:,1:opts.offst,1,ix);
 boundy = images.boundies{ix}{1};
     
 [cornies, cornyloc, ch] = computeCorners(A, boundy, opts);
+numcorners(ix) = length(cornyloc);
 corrects(ix) = strcmp(myclass{images.labels(ix)}, ch.guesstype);
 if corrects(ix) == false
     classmistakes(ix) = images.labels(ix);
