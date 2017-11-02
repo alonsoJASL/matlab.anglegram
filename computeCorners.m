@@ -56,8 +56,8 @@ if testag == true
     cornyhands.anglegram = anglematrix;
 end
 
-test = length(cornyhands.minval)==4 && ...
-    max(cornyhands.minval)-min(cornyhands.minval) < 1;
+test = length(cornyhands.minval)>=4 && ...
+    mean(minval)>=120;
 if test == true
     fprintf('%s: Suspicious points found. Rearranging corner points..\n',...
         mfilename);
