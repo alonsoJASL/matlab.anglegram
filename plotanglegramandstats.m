@@ -13,6 +13,11 @@ npoints = length(ch.angleSummaryVector);
 lowval = min(ch.angleSummaryVector);
 
 surf(XX, YY, lowval.*ZZ, ag, 'EdgeColor', 'none');
+ylabel('Points along boundary', 'FontSize', 18);
+xlabel('Separation', 'FontSize', 18);
+zlabel('Angle (DEG)', 'FontSize', 18);
+set(gca, 'FontSize', 14)
+
 colormap(cmap);
 hold on
 plot3(ones(1,npoints), 1:npoints, ch.angleSummaryVector, ...
@@ -28,7 +33,9 @@ if ~isempty(ch.intensityLocations)
         'LineWidth', 3);
 end
 axis tight;
+axis equal;
 set(gcf, 'Position', [2   562   958   434]);
+view(-59.1, 16);
 end
 
 function [cmap] = getoptions(s)
