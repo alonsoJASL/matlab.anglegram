@@ -24,7 +24,6 @@ function [cellcandidates, cellboundaries, tsegments] = getCellCandidatesFromSegm
 %                segmentsIndexes := Cell containing the boundaries 
 %                                 corresponding to each segmentsIndexes.
 % 
-[ST,~] = dbstack;
 
 % GENERATE (crude) CELL CANDIDATES.
 sortedlocations = sort(candieslocations);
@@ -103,7 +102,8 @@ tsegments = vertcat(tsegs, tpairs,tthrees);
 % RULE 0: Compare candidates with the nuclei
 if ~isempty(nuclei)
     %logline(ST.name,'info',...
-        'Image of nuclei found: selecting cell candidates based on nuclei.');
+    fprintf('%s. Image of nuclei found: selecting cell candidates based on nuclei.\n',...
+        mfilename);
     nucleiClumps = nuclei.*currentclump;
     re = regionprops(nucleiClumps>0);
     maxnuclei = max([re.Area]);
@@ -112,7 +112,8 @@ if ~isempty(nuclei)
     
     if size(cellcandidates,1)>numNuclei
         %logline(ST.name,'info',...
-            'More cell candidates than nuclei found: discarding obvious.');
+        fprintf('%s. More cell candidates than nuclei found: discarding obvious.',...
+            mfilename);
         for ix=1:size(cellcandidates,1)
             A = nucleiClumps.*cellcandidates{ix};
             regs = regionprops(A>0);
