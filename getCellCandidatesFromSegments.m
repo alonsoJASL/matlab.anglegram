@@ -101,7 +101,6 @@ tsegments = vertcat(tsegs, tpairs,tthrees);
 
 % RULE 0: Compare candidates with the nuclei
 if ~isempty(nuclei)
-    %logline(ST.name,'info',...
     fprintf('%s. Image of nuclei found: selecting cell candidates based on nuclei.\n',...
         mfilename);
     nucleiClumps = nuclei.*currentclump;

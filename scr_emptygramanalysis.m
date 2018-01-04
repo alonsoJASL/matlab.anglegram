@@ -17,7 +17,11 @@ boundy=bwboundaries(BW);
 
 %% get cell candidates
 cl = ch.intensityLocations; % candidate locations
-[bwcells, boundcells, ~] = getCellCandidatesFromSegments(cl, boundy{1}, BW, []);
+[bwcells, boundcells, tsegs] = getCellCandidatesFromSegments(cl, boundy{1}, BW, []);
+
+%% Group cell candidates
+% [cellgrix, nG, groupedCells] = cellCandidateGrouping(...
+%     bwcells, 2, size(singleClump,1), size(singleClump,2));
 
 %% calculate emptygram
 

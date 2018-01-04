@@ -18,23 +18,22 @@ function [cellgroupsindexes, nGroups, groupedCells] = cellCandidateGrouping(...
 %                     groupedCells := overlapping of cell candidates by
 %                                   groupsindexes.
 % 
-[ST,~] = dbstack;
 nCells = size(cellcandidates,1);
 
 if nCells == 1
-    logline(ST.name, 'info','Only one viable cell candidate found.');
+    fprintf('%s. Only one viable cell candidate found.\n', mfilename);
     cellgroupsindexes = 1;
     nGroups = size(cellgroupsindexes,1);
     groupedCells = cell(nGroups,1);
     groupedCells{1,1} = cellcandidates{1};
 elseif nCells == 2
-    logline(ST.name, 'info','Only two cell candidates found.');
+    fprintf('%s. Only two cell candidates found.\n', mfilename);
     cellgroupsindexes = [1 2];
     nGroups = size(cellgroupsindexes,1);
     groupedCells = cell(nGroups,1);
     groupedCells{1,1} = cellcandidates{1} + 2.*cellcandidates{2};
 else
-    logline(ST.name, 'info','Grouping candidates according to groups.');
+    fprintf('%s. Grouping candidates according to groups.\n', mfilename);
     cellgroupsindexes = nchoosek(1:nCells,numNuclei);
 
     nGroups = size(cellgroupsindexes,1);
