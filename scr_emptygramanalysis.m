@@ -24,4 +24,13 @@ cl = ch.intensityLocations; % candidate locations
 %     bwcells, 2, size(singleClump,1), size(singleClump,2));
 
 %% calculate emptygram
+close all
 
+spix = [1 5 9 13];
+for ixSegment = 1:4
+    [patchyag{ixSegment}, ~] = computepatchanglegram(boundcells{ixSegment});
+    subplot(4,4,spix(ixSegment))
+    imagesc(patchyag{whichsegment}, [0 360]);
+end
+subplot(4,4,[2 3 4 6 7 8 10 11 12 14 15 16])
+imagesc(aghs.oganglegram);
