@@ -2,13 +2,13 @@ function [cellgroupsindexes, nGroups, groupedCells] = cellCandidateGrouping(...
     cellcandidates, numNuclei,M,N)
 %                 GROUPING OF CELL CANDIDATES
 % Groups cell candidates depending on number of cells in clump
-% 
+%
 % USAGE:
 %       [groupsindexes, nGroups, groupedCells] = cellCandidateGrouping(...
 %                                           cellcandidates, numNuclei,M,N)
 % INPUT:
 %                   cellcandidates := Cell containing the binary images of
-%                                   cell candidates. 
+%                                   cell candidates.
 %                        numNuclei := Number of cells in clump.
 %                           [M, N] := image size.
 % OUTPUT:
@@ -17,7 +17,8 @@ function [cellgroupsindexes, nGroups, groupedCells] = cellCandidateGrouping(...
 %                          nGroups := number of groups size(groupsindexes,1)
 %                     groupedCells := overlapping of cell candidates by
 %                                   groupsindexes.
-% 
+%
+% small change
 nCells = size(cellcandidates,1);
 
 if nCells == 1
@@ -37,7 +38,7 @@ else
     cellgroupsindexes = nchoosek(1:nCells,numNuclei);
 
     nGroups = size(cellgroupsindexes,1);
-    
+
     groupedCells = cell(nGroups,1);
     for ix=1:nGroups
         groupedCells{ix} = zeros(M,N);
@@ -46,5 +47,5 @@ else
                 jx.*cellcandidates{cellgroupsindexes(ix,jx)};
         end
     end
-    
+
 end
