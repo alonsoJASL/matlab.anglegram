@@ -1,4 +1,6 @@
 # Anglegram analysis: baseline code
+[![View Anglegram on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://uk.mathworks.com/matlabcentral/fileexchange/74916-anglegram)
+
 This project is the implementation of the anglegram and the detection
 of junctions in the boundary of a clump.
 The algorithm detects junctions between the boundaries of overlapping
